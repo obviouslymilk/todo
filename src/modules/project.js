@@ -1,22 +1,22 @@
 export default class Project {
     constructor(name) {
-        this.name = name;
+        this._name = name;
         this.entries = [];
     }
 
     set name(value) {
-        this.name = value;
+        this._name = value;
     }
 
     get name() {
-        return this.name;
+        return this._name;
     }
 
-    set entries(value) {
+    setEntries(value) {
         this.entries = value;
     }
 
-    get entries() {
+    getEntries() {
         return this.entries;
     }
 
@@ -25,7 +25,7 @@ export default class Project {
     }
 
     contains(entryName) {
-        return this.entries.same((entry) => entry.name === entryName);
+        return this.entries.some((entry) => entry.name === entryName);
     }
     
     add(entry) {
