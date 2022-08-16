@@ -1,4 +1,3 @@
-
 export default class Entry {
     constructor(name) {
         this.name = name;
