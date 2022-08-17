@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+body, html {
+    margin: 0;
+    background: radial-gradient(circle at -4% -12.9%, rgb(74, 98, 110) 0.3%, rgb(30, 33, 48) 90.2%);
+}
+
+.divider {
+    width: 80%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.material-symbols-rounded {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 600,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.app-container {
+    display: flex;
+    align-items: stretch;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr;
+    height: 100vh;
+}
+
+.app-container > * {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 30ch;
+}
+
+.projects {
+    background: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.3px);
+    -webkit-backdrop-filter: blur(8.3px);
+    padding: 1.2em;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 20rem;
+    flex-grow: 1;
+    gap: 1em;
+    margin: 1em;
+    border-radius: 12px;
+}
+
+.display {
+    margin: 1em;
+    flex-basis: 0;
+    flex-grow: 999;
+    display: flex;
+    flex-direction: column;
+}
+
+.display h1 {
+    color: white;
+    margin: 0;
+}
+
+.project {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    font-weight: 600;
+    font-size: 1em;
+    color: white;
+    cursor: pointer;
+}
+
+.entries {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    gap: 6px;
+}
+
+.entry {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    padding: 0.5em;
+    border-radius: 6px;
+}
+
+.info h3 {
+    margin: 0;
+    color: white;
+    margin: 0.2em;
+    font-size: 1.5em;
+}
+
+.date-input {
+    margin: 0.2em;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color-scheme: dark;
+    opacity: 0.5;
+    font-weight: 400;
+    font-size: 1em;
+}
+
+.date-input:focus {
+    outline: none;
+}
+
+.entry-check {
+    width: 2em;
+    height: 2em;
+    margin-left: 1em;
+    background-color: none;
+    border-radius: 50%;
+    appearance: none;
+    border: 2px solid rgba(255, 255, 255, 0.24);
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.entry-check:checked {
+    background-color: white;
+}
+
+.desc {
+    margin-left: auto;
+    color: rgba(255, 255, 255, 0.16);
+}
+
+#today-icon {
+    color: #f87067;
+}
+
+#week-icon {
+    color: #46E085;
+}
+
+#important-icon {
+    color: #ffe561;
+}
+
+.add-project {
+    margin-top: auto;
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    margin-right: auto;
+}
+
+.add-entry {
+    margin-top: auto;
+    background-color: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    border-radius: 6px;
+}
+
+#project-textbox {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+}
+
+#project-textbox:focus, #entry-textbox:focus {
+    outline: none;
+}
+
+#entry-textbox {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+}
+
+.add-icon {
+    color: rgba(255, 255, 255, 0.25);
+}
