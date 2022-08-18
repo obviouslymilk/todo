@@ -1,4 +1,5 @@
 import Project from "./project";
+import Events from './events';
 
 export default class Display {
     static projectsContainer = document.querySelector('#custom-projects');
@@ -8,6 +9,7 @@ export default class Display {
     static init() {  
           Display.updateButtons();
           Display.updateInput();
+          Display.updateEvents();
     }
 
     static addProject(project) {
@@ -19,28 +21,38 @@ export default class Display {
         `
         Display.projectsContainer.insertAdjacentHTML("beforeend", p);
         Display.updateButtons();
+        console.log(`Project ${project.name} is created.`);
+    }
+
+    static addEntry(entry) {
+        
     }
 
     static removeProject(name) {
         const p = document.querySelector(`.project[data-name="${name}"]`);
         if (p) {
             p.remove();
-        }
-        
+            console.log(`Project ${name} was removed.`);
+        }    
     }
 
     static updateButtons() {
         Display.deleteButtons = document.querySelectorAll('.delete-icon');
         Display.deleteButtons.forEach(btn => {
-            btn.addEventListener('click', e => Display.removeProject(e.target.parentElement.dataset.name));
+            btn.addEventListener('click', e => Events.emit('tryRemoveProject', e.target.parentElement.dataset.name));
         });
     }
 
     static updateInput() {
         Display.addProjectInput.addEventListener('keyup', (e) => {
             if (e.keyCode === 13) {
-                this.addProject(new Project(e.target.value));
+                Events.emit('inputNewProject', e.target.value);
             }
         })
+    }
+
+    static updateEvents() {
+        Events.on('projectCreated', (project) => {Display.addProject(project)});
+        Events.on('projectRemoved', (name) => Display.removeProject(name));
     }
 }

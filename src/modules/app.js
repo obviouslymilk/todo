@@ -1,9 +1,12 @@
 import Project from './project';
 import Entry from './entry';
+import Events from './events';
 
 export default class App {
     constructor() {
         this.projects = [];
+        Events.on('inputNewProject', (name) => {this.add(new Project(name))});
+        Events.on('tryRemoveProject', (name) => this.remove(name))
     }
 
     getProjects() {
@@ -23,11 +26,13 @@ export default class App {
     }
     
     add(project) {
-        if (this.projects.find((project) => project.name === entryName)) return;
+        if (this.contains(project.name)) return alert('Name of a project has to be unique.');
         this.projects.push(project);
+        Events.emit('projectCreated', project)
     }
 
     remove(projectName) {
         this.projects = this.projects.filter((project) => project.name !== projectName);
+        Events.emit('projectRemoved', projectName)
     }
 }
