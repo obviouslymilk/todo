@@ -4,24 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>TODO</title>
 </head>
 <body>
     <div class="app-container">
-        <div class="projects">
-            <div class="project"><span class="material-symbols-rounded" id='today-icon'>sunny</span> Today <span class='desc'>3</span></div>
-            <div class="project"><span class="material-symbols-rounded" id='week-icon'>event</span> Week <span class='desc'>6</span></div>
-            <div class="project"><span class="material-symbols-rounded" id='important-icon'>magic_button</span> Important <span class='desc'></span></div>
-            <hr class='divider'>
+        <div id="projects">
+            <div class="project"><span class="material-symbols-rounded" id='today-icon'>sunny</span> <p>Today</p> <span class='desc'>3</span></div>
+            <div class="project"><span class="material-symbols-rounded" id='week-icon'>event</span> <p>Week</p> <span class='desc'>6</span></div>
+            <hr id='divider'>
+            <!--  -->
+            <div id='custom-projects'>
+
+
+            </div>
+            <!--  -->
             <div class='add-project'>
                 <span class="material-symbols-rounded add-icon">add</span>
                 <input type="text" name="project" id="project-textbox" placeholder='Add Project...'>
             </div>
         </div>
-        <div class="display">
+        <div id="display">
             <h1>Today</h1>
             <div class='entries'>
                 <div class="entry" id='entry-name'>
@@ -30,8 +35,7 @@
                         <h3>Play Dota 2</h3>
                         <input class='date-input' type="date" name="entry-date">
                     </div>
-                </div>
-                
+                </div> 
             </div>
             <div class="add-entry">
                 <span class="material-symbols-rounded add-icon">add</span>
