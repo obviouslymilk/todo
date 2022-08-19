@@ -1,6 +1,9 @@
-import Project from "./project";
 import Events from './events';
-// ВВОД TODO зависим от ввода проектов????
+
+function updateEntry(name, date, comp) {
+    Events.emit('updateEntry', name, date, comp);
+}
+
 export default class Display {
     static projectsContainer = document.querySelector('#custom-projects');
     static entriesContainer = document.querySelector('.entries');
@@ -23,8 +26,11 @@ export default class Display {
         </div>
         `
         Display.projectsContainer.insertAdjacentHTML("beforeend", p);
+
         const btn = document.querySelector(`.project[data-name='${project.name}'] > .delete-icon`);
         btn.addEventListener('click', e => Events.emit('tryRemoveProject', e.target.parentElement.dataset.name));
+        const pb = document.querySelector(`.project[data-name='${project.name}'] > .project-button`);
+        pb.addEventListener('click', e => Events.emit('tryUpdateProject', e.target.parentElement.dataset.name));
     }
 
 
@@ -32,18 +38,24 @@ export default class Display {
         if (!Display.entriesContainer.id) return;
         const e = `
         <div class="entry" data-name='${entry.name}'>
-                <input class='entry-check' type="checkbox" name="complete">
+                <input class='entry-check' type="checkbox" name="complete", ${entry.complete ? 'checked' : ''}>
                 <div class="info">
                     <h3>${entry.name}</h3>
-                    <input class='date-input' type="date" name="entry-date">
+                    <input class='date-input' type="date" name="entry-date" value='${entry.date}'>
                 </div>
                 <span class="material-symbols-rounded delete-icon">delete</span>
         </div> 
         `
 
         Display.entriesContainer.insertAdjacentHTML("beforeend", e);
+
         const btn = document.querySelector(`.entry[data-name='${entry.name}'] > .delete-icon`);
         btn.addEventListener('click', e => Events.emit('tryRemoveEntry', e.target.parentElement.dataset.name));
+
+        const date = document.querySelector(`.entry[data-name='${entry.name}'] > .info > .date-input`);
+        const complete = document.querySelector(`.entry[data-name='${entry.name}'] > .entry-check`);
+        date.addEventListener('input', e => updateEntry(entry.name, date.value, complete.checked));
+        complete.addEventListener('change', e => updateEntry(entry.name, date.value, complete.checked))
     }
 
 
@@ -82,7 +94,7 @@ export default class Display {
         Display.entriesContainer.id = project.name;
         Display.title.textContent = project.name;
     }
-    
+
 
     static updateInput() {
         Display.addProjectInput.addEventListener('keyup', (e) => {

@@ -6,7 +6,7 @@ export default class Project {
         this.entries = [];
         Events.on('inputNewEntry', (name, projectName) => {
             if(projectName !== this.name) return;
-            this.add(new Entry(name))
+            this.add(new Entry(name, '2022-08-19', false));
         });
         Events.on('tryRemoveEntry', (name) => this.remove(name))
     }
