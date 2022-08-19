@@ -79,6 +79,16 @@ body, html {
     color: white;
 }
 
+.app-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    font-weight: 600;
+    font-size: 1.5em;
+    color: white;
+}
+
 .project p {
     margin: 0;
     cursor: pointer;
@@ -149,17 +159,8 @@ body, html {
 }
 
 #today-icon {
-    color: #f87067;
+    color: #fafc7f;
 }
-
-#week-icon {
-    color: #46E085;
-}
-
-#important-icon {
-    color: #ffe561;
-}
-
 .project-icon {
     opacity: 0.64;
 }

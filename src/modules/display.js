@@ -11,6 +11,7 @@ export default class Display {
 
     static init() {  
           Display.updateProjectButtons();
+          Display.updateEntryButtons();
           Display.updateInput();
           Display.updateEvents();
     }
@@ -37,9 +38,11 @@ export default class Display {
                     <h3>${entry.name}</h3>
                     <input class='date-input' type="date" name="entry-date">
                 </div>
+                <span class="material-symbols-rounded delete-icon">delete</span>
         </div> 
         `
         Display.entriesContainer.insertAdjacentHTML("beforeend", e);
+        Display.updateEntryButtons();
     }
 
 
@@ -81,8 +84,8 @@ export default class Display {
 
     
     static updateProjectButtons() {
-        Display.deleteButtons = document.querySelectorAll('.delete-icon');
-        Display.projectsButtons = document.querySelectorAll('.project-button');
+        Display.deleteButtons = document.querySelectorAll('.project > .delete-icon');
+        Display.projectsButtons = document.querySelectorAll('.project > .project-button');
 
         Display.deleteButtons.forEach(btn => {
             btn.addEventListener('click', e => Events.emit('tryRemoveProject', e.target.parentElement.dataset.name));
@@ -95,10 +98,14 @@ export default class Display {
 
 
     static updateEntryButtons() {
+        const entryDeleteButtons = document.querySelectorAll('.entry > .delete-icon');
 
+        entryDeleteButtons.forEach(btn => {
+            btn.addEventListener('click', e => Events.emit('tryRemoveEntry', e.target.parentElement.dataset.name));
+        })
     }    
 
-    
+
     static updateInput() {
         Display.addProjectInput.addEventListener('keyup', (e) => {
             if (e.keyCode === 13) {
@@ -125,6 +132,7 @@ export default class Display {
         Events.on('projectCreated', (project) => {Display.addProject(project)});
         Events.on('entryCreated', (entry) => {Display.addEntry(entry)});
         Events.on('projectRemoved', (name) => Display.removeProject(name));
+        Events.on('entryRemoved', (name) => Display.removeEntry(name));
         Events.on('updateProject', (project) => Display.updateProject(project))
     }
 }

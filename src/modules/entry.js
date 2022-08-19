@@ -10,4 +10,12 @@ export default class Entry {
     set name(value) {
         this._name = value;
     }
+
+    get date() {
+        return this._date;
+    }
+
+    set date(value) {
+        this._date = value;
+    }
 }
