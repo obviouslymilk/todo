@@ -23,7 +23,7 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "date-fns": "^2.29.1",
+    "date-fns": "^2.29.2",
     "events": "^3.3.0"
   }
 }
