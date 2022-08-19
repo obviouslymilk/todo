@@ -1,6 +1,7 @@
 export default class Entry {
-    constructor(name) {
+    constructor(name, date) {
         this._name = name;
+        this._date = date;
     }
 
     get name() {

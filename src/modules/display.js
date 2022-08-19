@@ -10,8 +10,6 @@ export default class Display {
 
 
     static init() {  
-          Display.updateProjectButtons();
-          Display.updateEntryButtons();
           Display.updateInput();
           Display.updateEvents();
     }
@@ -25,7 +23,8 @@ export default class Display {
         </div>
         `
         Display.projectsContainer.insertAdjacentHTML("beforeend", p);
-        Display.updateProjectButtons();
+        const btn = document.querySelector(`.project[data-name='${project.name}'] > .delete-icon`);
+        btn.addEventListener('click', e => Events.emit('tryRemoveProject', e.target.parentElement.dataset.name));
     }
 
 
@@ -41,8 +40,10 @@ export default class Display {
                 <span class="material-symbols-rounded delete-icon">delete</span>
         </div> 
         `
+
         Display.entriesContainer.insertAdjacentHTML("beforeend", e);
-        Display.updateEntryButtons();
+        const btn = document.querySelector(`.entry[data-name='${entry.name}'] > .delete-icon`);
+        btn.addEventListener('click', e => Events.emit('tryRemoveEntry', e.target.parentElement.dataset.name));
     }
 
 
@@ -81,30 +82,7 @@ export default class Display {
         Display.entriesContainer.id = project.name;
         Display.title.textContent = project.name;
     }
-
     
-    static updateProjectButtons() {
-        Display.deleteButtons = document.querySelectorAll('.project > .delete-icon');
-        Display.projectsButtons = document.querySelectorAll('.project > .project-button');
-
-        Display.deleteButtons.forEach(btn => {
-            btn.addEventListener('click', e => Events.emit('tryRemoveProject', e.target.parentElement.dataset.name));
-        });
-
-        Display.projectsButtons.forEach(btn => {
-            btn.addEventListener('click', e => Events.emit('tryUpdateProject', e.target.parentElement.dataset.name));
-        });
-    }
-
-
-    static updateEntryButtons() {
-        const entryDeleteButtons = document.querySelectorAll('.entry > .delete-icon');
-
-        entryDeleteButtons.forEach(btn => {
-            btn.addEventListener('click', e => Events.emit('tryRemoveEntry', e.target.parentElement.dataset.name));
-        })
-    }    
-
 
     static updateInput() {
         Display.addProjectInput.addEventListener('keyup', (e) => {

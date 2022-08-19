@@ -42,7 +42,6 @@ export default class Project {
     }
 
     remove(entryName) {
-        console.log('so what');
         this.entries = this.entries.filter((entry) => entry.name !== entryName);
         Events.emit('entryRemoved', entryName);
     }
