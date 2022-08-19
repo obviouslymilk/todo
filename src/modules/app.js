@@ -7,6 +7,9 @@ export default class App {
         this.projects = [];
         Events.on('inputNewProject', (name) => {this.add(new Project(name))});
         Events.on('tryRemoveProject', (name) => this.remove(name))
+        Events.on('tryUpdateProject', (name) => {
+            Events.emit('updateProject', this.get(name));
+        })
     }
 
     getProjects() {
@@ -26,7 +29,7 @@ export default class App {
     }
     
     add(project) {
-        if (this.contains(project.name)) return alert('Name of a project has to be unique.');
+        if (this.contains(project.name)) return;
         this.projects.push(project);
         Events.emit('projectCreated', project)
     }

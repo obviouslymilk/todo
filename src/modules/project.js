@@ -1,7 +1,14 @@
+import Events from './events';
+import Entry from './entry';
 export default class Project {
     constructor(name) {
         this._name = name;
         this.entries = [];
+        Events.on('inputNewEntry', (name, projectName) => {
+            if(projectName !== this.name) return;
+            this.add(new Entry(name))
+        });
+        Events.on('tryRemoveEntry', (name) => this.remove(name))
     }
 
     set name(value) {
@@ -29,11 +36,13 @@ export default class Project {
     }
     
     add(entry) {
-        if (this.entries.find((entry) => entry.name === entryName)) return;
+        if (this.contains(entry.name)) return;
         this.entries.push(entry);
+        Events.emit('entryCreated', entry);
     }
 
     remove(entryName) {
         this.entries = this.entries.filter((entry) => entry.name !== entryName);
+        Events.emit('entryRemoved', entryName);
     }
 }
