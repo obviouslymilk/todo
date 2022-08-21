@@ -1,12 +1,13 @@
 import Events from './events';
 import Entry from './entry';
+import isToday from 'date-fns/isToday';
 export default class Project {
     constructor(name) {
         this._name = name;
         this.entries = [];
         Events.on('inputNewEntry', (name, projectName) => {
-            if(projectName !== this.name) return;
-            this.add(new Entry(name, '2022-08-19', false));
+            if (projectName !== this.name) return;
+            this.add(new Entry(name, new Date(), false));
         });
         Events.on('tryRemoveEntry', (name) => this.remove(name))
     }

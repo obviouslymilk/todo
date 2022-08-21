@@ -41,7 +41,7 @@ export default class Display {
                 <input class='entry-check' type="checkbox" name="complete", ${entry.complete ? 'checked' : ''}>
                 <div class="info">
                     <h3>${entry.name}</h3>
-                    <input class='date-input' type="date" name="entry-date" value='${entry.date}'>
+                    <input class='date-input' type="date" name="entry-date" value='${entry.getDateString()}'>
                 </div>
                 <span class="material-symbols-rounded delete-icon">delete</span>
         </div> 

@@ -1,3 +1,4 @@
+import { format, parseISO, toDate } from 'date-fns';
 import Events from './events';
 export default class Entry {
     constructor(name, date, comp) {
@@ -6,9 +7,9 @@ export default class Entry {
         this._comp = comp;
 
         Events.on('updateEntry', (name, date, complete) => {
-            console.log(complete);
             if (this.name !== name) return;
-            this.date = date;
+            this._date = new Date(date);
+            console.log(this._date);
             this.complete = complete;
         })
     }
@@ -35,5 +36,9 @@ export default class Entry {
 
     set complete(value) {
         this._comp = value;
+    }
+
+    getDateString() {
+        return format(this._date, 'yyyy-MM-dd');
     }
 }
